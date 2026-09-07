@@ -1,0 +1,21 @@
+{
+  "note": "Only include recipients who are legitimately message-eligible. relation is a server-side label; this file is not scraped automatically from instagram.com.",
+  "items": [
+    {
+      "recipient_id": "REPLACE_WITH_ELIGIBLE_IG_SCOPED_ID",
+      "username": "example_user",
+      "first_name": "Example",
+      "opt_in": "yes",
+      "messaging_eligible": "yes",
+      "relation": "followers"
+    },
+    {
+      "recipient_id": "REPLACE_WITH_ELIGIBLE_IG_SCOPED_ID_2",
+      "username": "example_following",
+      "first_name": "Example",
+      "opt_in": "yes",
+      "messaging_eligible": "yes",
+      "relation": "following"
+    }
+  ]
+}
