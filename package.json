@@ -1,0 +1,16 @@
+{
+  "name": "ig-auto-dm-render-backend",
+  "version": "1.5.0",
+  "private": true,
+  "description": "Production backend for IG Auto DM Manager on Render with PostgreSQL-backed licensing and usage",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}
