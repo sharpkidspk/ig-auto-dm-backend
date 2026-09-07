@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: ig-auto-dm-api
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: GRAPH_BASE_URL
+        value: https://graph.instagram.com
+      - key: GRAPH_VERSION
+        value: v23.0
