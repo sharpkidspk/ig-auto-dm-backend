@@ -129,6 +129,7 @@ async function planFor(deviceId, token) {
   const h = tokenHash(token);
   const { rows } = await pool.query(
     `SELECT s.plan FROM license_sessions s JOIN licenses l ON l.id=s.license_id
+      JOIN license_activations a ON a.license_id=s.license_id AND a.device_id=s.device_id
       WHERE s.token_hash=$1 AND s.device_id=$2 AND s.revoked_at IS NULL
         AND (s.expires_at IS NULL OR s.expires_at>NOW()) AND l.status='active' LIMIT 1`,
     [h, deviceId]
@@ -173,7 +174,7 @@ async function activate(deviceId, key) {
   try {
     await client.query('BEGIN');
     const lr = await client.query(
-      `SELECT id,plan FROM licenses WHERE digest=$1 AND status='active' LIMIT 1`, [digest]);
+      `SELECT id,plan FROM licenses WHERE digest=$1 AND status='active' LIMIT 1 FOR UPDATE`, [digest]);
     const lic = lr.rows[0];
     if (!lic) { await client.query('ROLLBACK'); return { status: 403, error: 'Invalid or inactive premium license key.' }; }
     const br = await client.query('SELECT device_id FROM license_activations WHERE license_id=$1 FOR UPDATE', [lic.id]);
